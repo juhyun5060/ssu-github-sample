@@ -55,21 +55,21 @@ jobs:
         script: |
           
           # 기존 컨테이너 중지 및 제거
-           docker stop ssu-flask-app || true
-           docker rm ssu-flask-app || true
+           docker stop ssu-flask-app-juhyun || true
+           docker rm ssu-flask-app-juhyun || true
           
           # 기존 이미지 제거
-           docker rmi ${{ env.DOCKER_USERNAME }}/ssu-flask-app:latest || true
+           docker rmi ${{ env.DOCKER_USERNAME }}/ssu-flask-app-juhyun:latest || true
           
           # Docker Hub에서 새 이미지 pull
-           docker pull ${{ env.DOCKER_USERNAME }}/ssu-flask-app:latest
+           docker pull ${{ env.DOCKER_USERNAME }}/ssu-flask-app-juhyun:latest
           
           # 컨테이너 실행
            docker run -d \
-            --name ssu-flask-app \
+            --name ssu-flask-app-juhyun \
             --restart unless-stopped \
             -p ${{ env.HOST_PORT }}:5000 \
-            ${{ env.DOCKER_USERNAME }}/ssu-flask-app:latest
+            ${{ env.DOCKER_USERNAME }}/ssu-flask-app-juhyun:latest
           
           # 배포 완료 메시지
           echo "배포가 완료되었습니다!"
