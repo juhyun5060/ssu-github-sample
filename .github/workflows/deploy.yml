@@ -55,17 +55,17 @@ jobs:
         script: |
           
           # 기존 컨테이너 중지 및 제거
-          sudo docker stop ssu-flask-app || true
-          sudo docker rm ssu-flask-app || true
+           docker stop ssu-flask-app || true
+           docker rm ssu-flask-app || true
           
           # 기존 이미지 제거
-          sudo docker rmi ${{ env.DOCKER_USERNAME }}/ssu-flask-app:latest || true
+           docker rmi ${{ env.DOCKER_USERNAME }}/ssu-flask-app:latest || true
           
           # Docker Hub에서 새 이미지 pull
-          sudo docker pull ${{ env.DOCKER_USERNAME }}/ssu-flask-app:latest
+           docker pull ${{ env.DOCKER_USERNAME }}/ssu-flask-app:latest
           
           # 컨테이너 실행
-          sudo docker run -d \
+           docker run -d \
             --name ssu-flask-app \
             --restart unless-stopped \
             -p ${{ env.HOST_PORT }}:5000 \
