@@ -6,13 +6,13 @@ on:
   workflow_dispatch:
 
 env:
-  DOCKER_IMAGE: ssu-flask-app
+  DOCKER_IMAGE: ssu-flask-app-juhyun
   DOCKER_TAG: latest
   DOCKER_USERNAME: hit1414
   SSH_USER: ssuuser
   SSH_PASSWORD: ssupassword20250820ec2user
   SERVER_IP: 3.35.69.129
-  HOST_PORT: 8500
+  HOST_PORT: 8555
 
 jobs:
   build-and-push:
