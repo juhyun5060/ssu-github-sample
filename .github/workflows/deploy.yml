@@ -8,7 +8,7 @@ on:
 env:
   DOCKER_IMAGE: ssu-flask-app-juhyun
   DOCKER_TAG: latest
-  DOCKER_USERNAME: hit1414
+  DOCKER_USERNAME: juhyun5060
   SSH_USER: ssuuser
   SSH_PASSWORD: ssupassword20250820ec2user
   SERVER_IP: 3.35.69.129
