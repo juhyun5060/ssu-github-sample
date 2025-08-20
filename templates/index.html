@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>숭실대학교 - Hello World</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            padding: 60px;
+            text-align: center;
+            max-width: 600px;
+            width: 90%;
+        }
+
+        .logo {
+            margin-bottom: 40px;
+        }
+
+        .logo-graphic {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .logo-element {
+            width: 8px;
+            height: 60px;
+            margin: 0 4px;
+            border-radius: 4px;
+            animation: wave 2s ease-in-out infinite;
+        }
+
+        .logo-element:nth-child(1) {
+            background: #2c5f5f;
+            animation-delay: 0s;
+        }
+
+        .logo-element:nth-child(2) {
+            background: #4a9b9b;
+            animation-delay: 0.2s;
+        }
+
+        .logo-element:nth-child(3) {
+            background: #3a7a7a;
+            animation-delay: 0.4s;
+        }
+
+        @keyframes wave {
+            0%, 100% { transform: scaleY(1); }
+            50% { transform: scaleY(1.2); }
+        }
+
+        .korean-title {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+        }
+
+        .english-title {
+            font-size: 1.5rem;
+            color: #4a9b9b;
+            margin-bottom: 40px;
+            font-weight: 500;
+        }
+
+        .hello-world {
+            font-size: 3rem;
+            color: #2c5f5f;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .flask-info {
+            margin-top: 40px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            border-left: 4px solid #4a9b9b;
+        }
+
+        .flask-info h3 {
+            color: #2c5f5f;
+            margin-bottom: 10px;
+        }
+
+        .flask-info p {
+            color: #666;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">
+            <div class="logo-graphic">
+                <div class="logo-element"></div>
+                <div class="logo-element"></div>
+                <div class="logo-element"></div>
+            </div>
+            <div class="korean-title">숭실대학교</div>
+            <div class="english-title">Soongsil University</div>
+        </div>
+        
+        <div class="hello-world">Hello World!</div>
+        <div class="subtitle">
+            Flask로 만든 웹 애플리케이션에 오신 것을 환영합니다
+        </div>
+        
+        <div class="flask-info">
+            <h3>Flask 애플리케이션</h3>
+            <p>이 페이지는 Python Flask 프레임워크를 사용하여 만들어졌습니다.</p>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,75 @@
+name: Deploy to EC2
+
+on:
+  push:
+    branches: [ main, master ]
+  workflow_dispatch:
+
+env:
+  DOCKER_IMAGE: ssu-flask-app
+  DOCKER_TAG: latest
+  DOCKER_USERNAME: your-dockerhub-username
+  SSH_USER: ssuuser
+  SSH_PASSWORD: ssupassword20250820ec2user
+  SERVER_IP: 3.35.69.129
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v3
+      
+    - name: Login to Docker Hub
+      uses: docker/login-action@v3
+      with:
+        username: ${{ env.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+        
+    - name: Build and push Docker image
+      uses: docker/build-push-action@v5
+      with:
+        context: .
+        push: true
+        tags: ${{ env.DOCKER_USERNAME }}/${{ env.DOCKER_IMAGE }}:${{ env.DOCKER_TAG }}
+        cache-from: type=gha
+        cache-to: type=gha,mode=max
+
+  deploy:
+    needs: build-and-push
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Deploy to EC2
+      uses: appleboy/ssh-action@v1.0.3
+      with:
+        host: ${{ env.SERVER_IP }}
+        username: ${{ env.SSH_USER }}
+        password: ${{ env.SSH_PASSWORD }}
+        port: 22
+        script: |
+          
+          # 기존 컨테이너 중지 및 제거
+          sudo docker stop ssu-flask-app || true
+          sudo docker rm ssu-flask-app || true
+          
+          # 기존 이미지 제거
+          sudo docker rmi ${{ env.DOCKER_USERNAME }}/ssu-flask-app:latest || true
+          
+          # Docker Hub에서 새 이미지 pull
+          sudo docker pull ${{ env.DOCKER_USERNAME }}/ssu-flask-app:latest
+          
+          # 컨테이너 실행
+          sudo docker run -d \
+            --name ssu-flask-app \
+            --restart unless-stopped \
+            -p 80:5000 \
+            ${{ env.DOCKER_USERNAME }}/ssu-flask-app:latest
+          
+          # 배포 완료 메시지
+          echo "배포가 완료되었습니다!"
+          echo "애플리케이션은 http://${{ env.SERVER_IP }} 에서 접근 가능합니다."
