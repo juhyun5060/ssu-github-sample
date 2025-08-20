@@ -72,7 +72,7 @@ docker-compose up
 1. EC2 서버에 SSH 연결
 2. 기존 컨테이너 중지 및 제거
 3. Docker Hub에서 새 이미지 pull
-4. 포트 80에서 애플리케이션 실행
+4. 설정된 포트에서 애플리케이션 실행
 
 ### 설정
 
@@ -83,10 +83,11 @@ docker-compose up
 env:
   DOCKER_IMAGE: ssu-flask-app
   DOCKER_TAG: latest
-  DOCKER_USERNAME: your-dockerhub-username  # Docker Hub 사용자명으로 변경
+  DOCKER_USERNAME: hit1414
   SSH_USER: ssuuser
   SSH_PASSWORD: ssupassword20250820ec2user
   SERVER_IP: 3.35.69.129
+  HOST_PORT: 80  # 호스트 포트 (기본값: 80)
 ```
 
 #### GitHub Secrets 설정
@@ -95,7 +96,7 @@ Docker Hub 로그인을 위해서만 다음 시크릿이 필요합니다:
 - `DOCKER_PASSWORD`: Docker Hub 액세스 토큰
 
 ### 배포 후 접속
-배포가 완료되면 `http://3.35.69.129`에서 애플리케이션에 접속할 수 있습니다.
+배포가 완료되면 `http://3.35.69.129:80` (또는 `http://3.35.69.129`)에서 애플리케이션에 접속할 수 있습니다.
 
 ## 파일 구조
 

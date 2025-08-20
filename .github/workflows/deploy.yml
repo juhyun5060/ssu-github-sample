@@ -8,10 +8,11 @@ on:
 env:
   DOCKER_IMAGE: ssu-flask-app
   DOCKER_TAG: latest
-  DOCKER_USERNAME: your-dockerhub-username
+  DOCKER_USERNAME: hit1414
   SSH_USER: ssuuser
   SSH_PASSWORD: ssupassword20250820ec2user
   SERVER_IP: 3.35.69.129
+  HOST_PORT: 8500
 
 jobs:
   build-and-push:
@@ -67,9 +68,9 @@ jobs:
           sudo docker run -d \
             --name ssu-flask-app \
             --restart unless-stopped \
-            -p 80:5000 \
+            -p ${{ env.HOST_PORT }}:5000 \
             ${{ env.DOCKER_USERNAME }}/ssu-flask-app:latest
           
           # 배포 완료 메시지
           echo "배포가 완료되었습니다!"
-          echo "애플리케이션은 http://${{ env.SERVER_IP }} 에서 접근 가능합니다."
+          echo "애플리케이션은 http://${{ env.SERVER_IP }}:${{ env.HOST_PORT }} 에서 접근 가능합니다."
